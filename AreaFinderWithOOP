@@ -1,0 +1,78 @@
+package JavaPWAssignments;
+import java.util.Scanner;
+abstract class Shape
+{
+    float area;
+    abstract public void acceptInput();              //ABSTRACTION
+    abstract public void compute();
+    public void disp()
+    {
+        System.out.println("The area is:"+area);
+    }
+}
+class Square2 extends Shape                          //INHERITANCE
+{
+    private float length;                            //ENCAPSULATION
+    @Override
+    public void acceptInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the length of the square:");
+        length=sc.nextFloat();
+    }
+    public void compute()
+    {
+        area=length*length;
+    }
+}
+class Rectangle2 extends Shape
+{
+    private float length;
+    private float breadth;
+    @Override
+    public void acceptInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the length of the Rectangle:");
+        length=sc.nextFloat();
+        System.out.println("Enter the breadth of the square:");
+        breadth=sc.nextFloat();
+    }
+    public void compute()
+    {
+        area=length*breadth;
+    }
+}
+class Circle2 extends Shape
+{
+    private float radius;
+    @Override
+    public void acceptInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the radius of the circle:");
+        radius=sc.nextFloat();
+    }
+    public void compute()
+    {
+        area=3.141f*radius*radius;
+    }
+}
+class Geometry
+{
+    public void permit(Shape ref)
+    {
+        ref.acceptInput();
+        ref.compute();
+        ref.disp();
+    }
+}
+public class FindArea2 {
+    public static void main(String[] args) {
+        Square2 s = new Square2();
+        Rectangle2 r = new Rectangle2();
+        Circle2 c = new Circle2();
+        Geometry g = new Geometry();
+
+        g.permit(s);
+        g.permit(r);                          //POLYMORPHISM
+        g.permit(c);
+    }
+}
